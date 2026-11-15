@@ -149,13 +149,22 @@ For every test case, suggest an integer score from 1 to 5 for each attribute:
 5. historical_defect_exposure
 
 A score of 1 means low assessed risk. A score of 5 means high assessed risk.
-Use only the supplied information. Do not invent historical defects or claim
-that a risk is confirmed when the context does not support it. Use a neutral
-score of 3 when evidence is insufficient, and explain the uncertainty.
+Use only the supplied information. Do not use outside knowledge.
+
+For every score, also give an evidence label and the source:
+- "supported": a document states it directly. A statement that nothing
+  changed, or that there were no defects, counts as supported.
+- "inferred": no document states it, and you reasoned your way to the score.
+- "missing": the documents say nothing at all about it. Use score 3.
+Write the label, a colon, the document reference (for example R2, C1, D2;
+if the statement is in an unnumbered closing note, write "closing note"),
+and a few words, for example "supported: C1 login code reorganised".
 
 Return a JSON array containing exactly one object per test case. Each object
-must contain test_case_id, business_criticality, security_sensitivity,
-transaction_impact, change_relevance, historical_defect_exposure, and explanation.
+must contain test_case_id, the five scores, five evidence fields named
+business_criticality_evidence, security_sensitivity_evidence,
+transaction_impact_evidence, change_relevance_evidence and
+historical_defect_exposure_evidence, and explanation.
 Scores must be integers from 1 to 5. Return JSON only.
 """
 
