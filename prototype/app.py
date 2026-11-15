@@ -1,4 +1,6 @@
+import datetime
 import hashlib
+import os
 import json
 
 import pandas as pd
@@ -174,6 +176,16 @@ Scores must be integers from 1 to 5. Return JSON only.
                     contents=prompt,
                     config={"response_mime_type": "application/json"},
                 )
+
+            os.makedirs("run_logs", exist_ok=True)
+            with open("run_logs/runs.jsonl", "a", encoding="utf-8") as log_file:
+                log_file.write(json.dumps({
+                    "time": datetime.datetime.now().isoformat(timespec="seconds"),
+                    "model": GEMINI_MODEL,
+                    "temperature": "default (not set)",
+                    "prompt": prompt,
+                    "raw_response": response.text,
+                }, ensure_ascii=False) + "\n")
 
             if not response.text:
                 raise ValueError("Gemini returned an empty response.")
