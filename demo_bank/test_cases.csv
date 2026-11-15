@@ -1,0 +1,31 @@
+test_case_id,description,functionality
+TC001,Verify successful customer login,Authentication
+TC002,Verify invalid password rejection,Authentication
+TC003,Verify account lockout after three failed logins,Authentication
+TC004,Verify failed-attempt counter resets after success,Authentication
+TC005,Verify logout invalidates the session,Authentication
+TC006,Verify login with unknown username is rejected,Authentication
+TC007,Verify transfer between own accounts with fee,Fund Transfer
+TC008,Verify transfer to another customer's account,Fund Transfer
+TC009,Verify zero-amount transfer is rejected,Fund Transfer
+TC010,Verify negative-amount transfer is rejected,Fund Transfer
+TC011,Verify transfer from an account the user does not own is rejected,Fund Transfer
+TC012,Verify transfer is rejected when balance cannot cover amount plus fee,Fund Transfer
+TC013,Verify daily transfer limit is applied cumulatively,Fund Transfer
+TC014,Verify successful payment to a merchant with service charge,Payment Processing
+TC015,Verify payment service charge is rounded correctly,Payment Processing
+TC016,Verify duplicate payment reference is rejected,Payment Processing
+TC017,Verify payment exactly at the per-payment limit is accepted,Payment Processing
+TC018,Verify payment above the per-payment limit is rejected,Payment Processing
+TC019,Verify payment from an account the user does not own is rejected,Payment Processing
+TC020,Verify successful password change,Account Management
+TC021,Verify password change is rejected when the old password is wrong,Account Management
+TC022,Verify password policy rejects a password shorter than 8 characters,Account Management
+TC023,Verify successful email update,Account Management
+TC024,Verify invalid email address is rejected,Account Management
+TC025,Verify balance enquiry on another customer's account is rejected,Account Management
+TC026,Verify history lists transactions newest first,Transaction History
+TC027,"Verify history entries show type, amount, fee and counterparty",Transaction History
+TC028,Verify history pagination returns the correct page,Transaction History
+TC029,Verify history of another customer's account is rejected,Transaction History
+TC030,Verify history is empty for an account with no transactions,Transaction History
