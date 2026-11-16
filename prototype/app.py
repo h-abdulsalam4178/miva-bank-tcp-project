@@ -39,6 +39,7 @@ DEFAULT_WEIGHTS = {
 REQUIRED_COLUMNS = ["test_case_id", "description", "functionality"]
 SCORE_FIELDS = list(RISK_ATTRIBUTES.keys())
 GEMINI_MODEL = "gemini-3.5-flash-lite"
+PROMPT_VERSION = "v1.0"
 
 
 st.subheader("1. Upload Regression Test Cases")
@@ -193,6 +194,7 @@ Scores must be integers from 1 to 5. Return JSON only.
                 log_file.write(json.dumps({
                     "time": datetime.datetime.now().isoformat(timespec="seconds"),
                     "model": GEMINI_MODEL,
+                    "prompt_version": PROMPT_VERSION,
                     "temperature": "default (not set)",
                     "prompt": prompt,
                     "raw_response": response.text,
