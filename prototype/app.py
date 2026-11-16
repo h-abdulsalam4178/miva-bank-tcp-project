@@ -153,6 +153,17 @@ For every test case, suggest an integer score from 1 to 5 for each attribute:
 A score of 1 means low assessed risk. A score of 5 means high assessed risk.
 Use only the supplied information. Do not use outside knowledge.
 
+Score meanings (use the whole 1-5 range):
+business_criticality: 5 = failure stops customers using the bank or moves
+money wrongly; 3 = an important but not essential feature; 1 = a
+convenience feature with little business effect.
+security_sensitivity: 5 = failure could let an unauthorised person access
+accounts or move money; 3 = failure weakens a security control or exposes
+some personal data; 1 = no security consequence.
+transaction_impact: 5 = failure directly changes the amount of money moved,
+charged or credited; 3 = failure affects records or access to money but not
+the amounts; 1 = no effect on money or records.
+
 For every score, also give an evidence label and the source:
 - "supported": a document states it directly. A statement that nothing
   changed, or that there were no defects, counts as supported.
