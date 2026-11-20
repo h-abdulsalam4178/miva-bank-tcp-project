@@ -1,8 +1,8 @@
 import json
 import os
+import config
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-LOG = os.path.join(HERE, "..", "prototype", "run_logs", "runs.jsonl")
 
 WEIGHTS = {
     "business_criticality": 0.25,
@@ -12,16 +12,11 @@ WEIGHTS = {
     "historical_defect_exposure": 0.10,
 }
 
-with open(LOG, encoding="utf-8") as file:
-    runs = [json.loads(line) for line in file if line.strip()]
-
-official = [r for r in runs
-            if r.get("prompt_version") == "v1.0" and r["time"] >= "2026-11-17"]
+official = config.official_runs()
 print("Official runs found:", len(official))
 
 
-def ranking(run):
-    rows = json.loads(run["raw_response"])
+def ranking(rows):
     scored = []
     for row in rows:
         total = sum(WEIGHTS[name] * row[name] for name in WEIGHTS)

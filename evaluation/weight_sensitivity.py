@@ -2,9 +2,9 @@ import csv
 import itertools
 import json
 import os
+import config
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-LOG = os.path.join(HERE, "..", "prototype", "run_logs", "runs.jsonl")
 MATRIX = os.path.join(HERE, "..", "demo_bank", "fault_matrix.csv")
 
 NAMES = ["business_criticality", "security_sensitivity", "transaction_impact",
@@ -16,13 +16,6 @@ WEIGHT_SETS = {
     "B impact-heavy": [0.30, 0.20, 0.30, 0.10, 0.10],
     "C likelihood-heavy": [0.15, 0.15, 0.15, 0.35, 0.20],
 }
-
-
-def official_runs():
-    with open(LOG, encoding="utf-8") as file:
-        runs = [json.loads(line) for line in file if line.strip()]
-    return [json.loads(r["raw_response"]) for r in runs
-            if r.get("prompt_version") == "v1.0" and r["time"] >= "2026-11-17"]
 
 
 def ranking(rows, weights):
@@ -65,7 +58,7 @@ def kendall(a, b):
 
 
 matrix = load_matrix()
-runs = official_runs()
+runs = config.official_runs()
 print("Official runs:", len(runs))
 
 for name, weights in WEIGHT_SETS.items():
