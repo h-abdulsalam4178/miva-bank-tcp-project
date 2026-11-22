@@ -1,0 +1,66 @@
+Run-log entry (official run 1 of 5)
+time: 2026-11-17T09:33:27
+model: gemini-3.5-flash-lite
+prompt_version: v1.0
+temperature: default (not set)
+
+prompt (shortened):
+
+You are assisting with risk-based test case prioritization for a financial web application.
+
+APPLICATION CONTEXT:
+# Miva Bank (fictional demo): Business Rules and Requirements
+
+R1 Authentication: A customer logs in with a username and password. A failed
+login gives the same generic message whether the username or the password
+was wrong.
+R2 Lockout: After 3 consecutive failed login attempts the account is locked,
+even if the correct password is then entered. A successful login resets
+the failed-attempt counter to zero.
+R3 Logout: Logging out ends the session. The session ticket must stop working
+immediately.
+R4 Transfers: The amount must be greater than zero. The source and destination
+accou
+[... middle of the prompt omitted: context documents and test cases ...]
+ an unnumbered closing note, write "closing note"),
+and a few words, for example "supported: C1 login code reorganised".
+
+Return a JSON array containing exactly one object per test case. Each object
+must contain test_case_id, the five scores, five evidence fields named
+business_criticality_evidence, security_sensitivity_evidence,
+transaction_impact_evidence, change_relevance_evidence and
+historical_defect_exposure_evidence, and explanation.
+Scores must be integers from 1 to 5. Return JSON only.
+
+
+raw_response (first 2 of 30 test objects):
+[
+  {
+    "test_case_id": "TC001",
+    "business_criticality": 5,
+    "security_sensitivity": 5,
+    "transaction_impact": 3,
+    "change_relevance": 5,
+    "historical_defect_exposure": 5,
+    "business_criticality_evidence": "supported: R1 login allows customer access to the bank",
+    "security_sensitivity_evidence": "supported: R1 login is an access control mechanism",
+    "transaction_impact_evidence": "inferred: login affects access to money but not direct amounts",
+    "change_relevance_evidence": "supported: C1 login and session-handling code was reorganised",
+    "historical_defect_exposure_evidence": "supported: D2 authentication defect reported and fixed in earlier release",
+    "explanation": "Login is critical for access, modified recently in C1, and has a past defect record in D2."
+  },
+  {
+    "test_case_id": "TC002",
+    "business_criticality": 5,
+    "security_sensitivity": 5,
+    "transaction_impact": 3,
+    "change_relevance": 5,
+    "historical_defect_exposure": 5,
+    "business_criticality_evidence": "supported: R1 login mechanism is essential for bank access",
+    "security_sensitivity_evidence": "supported: R1 generic failure message prevents password guessing",
+    "transaction_impact_evidence": "inferred: login verification affects access control rather than amounts",
+    "change_relevance_evidence": "supported: C1 login and session-handling code was reorganised",
+    "historical_defect_exposure_evidence": "supported: D2 authentication defect reported and fixed in earlier release",
+    "explanation": "Authentication checks are critical, modified in C1, with historical defect exposure."
+  }
+]

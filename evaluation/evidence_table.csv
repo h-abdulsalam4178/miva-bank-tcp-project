@@ -1,0 +1,16 @@
+﻿test,attribute,score,evidence
+TC003,business_criticality,5,supported: R2 account lockout prevents further access
+TC003,security_sensitivity,5,supported: R2 lockout prevents brute force attacks
+TC003,transaction_impact,3,inferred: lockout prevents access to money without directly altering balances
+TC003,change_relevance,5,supported: C1 login and session-handling code was reorganised
+TC003,historical_defect_exposure,5,supported: D2 authentication defect reported and fixed in earlier release
+TC012,business_criticality,5,supported: R5 sender needs enough balance to cover amount plus fee
+TC012,security_sensitivity,3,inferred: validation against negative balance manipulation
+TC012,transaction_impact,5,supported: R5 enforces correct fee deduction and balance validation
+TC012,change_relevance,1,supported: C1 notes no changes were made to Fund Transfer
+TC012,historical_defect_exposure,1,supported: tracker records no defects in earlier releases for Fund Transfer
+TC023,business_criticality,3,supported: R9 email update functionality
+TC023,security_sensitivity,3,supported: R9 ensures valid contact data format
+TC023,transaction_impact,1,supported: R9 has no effect on financial records or money
+TC023,change_relevance,1,supported: C1 notes no changes were made to Account Management
+TC023,historical_defect_exposure,1,supported: tracker records no defects in earlier releases for Account Management
